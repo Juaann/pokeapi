@@ -18,10 +18,7 @@ function App() {
             {/* <ContadorHooks/>
           <hr/>
             <AjaxHooks/>
-<<<<<<< HEAD
           <hr></hr>
-=======
->>>>>>> 3ceca0533ce8c33bab02805022fab9521855c469
           <hr/>
             <CustomHook/>
           <hr/>
