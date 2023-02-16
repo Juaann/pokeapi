@@ -26,6 +26,7 @@ export default function AjaxHooks(){
   }
   
   const parseAndSetPokemons = async (pokemonsUnparsed) => {
+    //console.log(pokemonsUnparsed);
     const pokemonResponsesPromises = await pokemonsUnparsed.map(async (pokemon) => {
       const pokemonData = await getPokemonByUrl(pokemon.url)
       return {
