@@ -1,20 +1,10 @@
 import React, { useState,useEffect } from 'react';
+import { Pokemon } from './Pokemon';
 const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon/'
-
-function Pokemon({avatar,name}){
-	return(
-    <>
-		<figure>
-			<img src={avatar} alt={name}/>
-			<figcaption>{name}</figcaption>
-      <button onClick={console.log()}>Favoritos</button>
-		</figure>
-    </>
-	)
-}
 
 let puerta = false
 export default function DisplayPokemons(){
+  const [favoritePokemons, setFavoritePokemons] = useState([])
   const [pokemons, setPokemons] = useState([])
   const getAllPokemons = async () => {
     // retrieve all pokemons
@@ -30,7 +20,7 @@ export default function DisplayPokemons(){
   }
   
   const parseAndSetPokemons = async (pokemonsUnparsed) => {
-    console.log(pokemonsUnparsed);
+    //console.log(pokemonsUnparsed);
     const pokemonResponsesPromises = await pokemonsUnparsed.map(async (pokemon) => {
       const pokemonData = await getPokemonByUrl(pokemon.url)
       return {
@@ -54,41 +44,22 @@ export default function DisplayPokemons(){
  		}
  	},[])
   
+  const onAddFavorites = (pokemon) =>{
+    setFavoritePokemons([...favoritePokemons, pokemon])
+  }
+
 	return(
 		<>
 			<h1>Hook - useEffect (peticiones aync/pokeapi)</h1>
 			{pokemons.length === 0 ? (
 				<h3>Cargando...</h3>
 			):(
-				pokemons.map((el)=>(<Pokemon key={el.id} name={el.name} avatar={el.avatar}/>))
+				pokemons.map((el)=>(<Pokemon onAddFavorites={onAddFavorites} key={el.id} name={el.name} avatar={el.avatar}/>))
 			)}
+      <div>
+        <h2>Mis favoritos</h2>
+        {favoritePokemons.map((pokemon)=> <p key={pokemon.name}>{pokemon.name}</p>)}
+      </div>
 		</>
 	)
 }
-
-//  let ejecutado = false;
-
-//  export default function AjaxHooks(){
-//  	const [pokemons, setPokemons] = useState([])
-//  	useEffect(() => {
-//  		if (!ejecutado){
-//  			ejecutado = true;
-//  			let url = "https://pokeapi.co/api/v2/pokemon/";
-//  			fetch(url)
-//  				.then((res)=>res.json())
-//  				.then((json)=>{
-//  					json.results.forEach((el)=>{
-//  						fetch(el.url)
-//  							.then((res)=>res.json())
-//  							.then((json)=>{
-//  								let pokemon ={
-//  									id:json.id,
-//  									name:json.name,
-//  									avatar:json.sprites.front_default,
-//  								}
-//  								setPokemons((pokemons)=>[...pokemons,pokemon])
-//  							})
-//  					})
-//  				})
-//  		}
-//  	},[])
