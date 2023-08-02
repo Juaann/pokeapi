@@ -1,16 +1,20 @@
 import React, { useState,useEffect } from 'react';
 const pokeApiURL = 'https://pokeapi.co/api/v2/pokemon/'
+
 function Pokemon({avatar,name}){
 	return(
+    <>
 		<figure>
 			<img src={avatar} alt={name}/>
 			<figcaption>{name}</figcaption>
+      <button onClick={console.log()}>Favoritos</button>
 		</figure>
+    </>
 	)
 }
 
 let puerta = false
-export default function AjaxHooks(){
+export default function DisplayPokemons(){
   const [pokemons, setPokemons] = useState([])
   const getAllPokemons = async () => {
     // retrieve all pokemons
@@ -26,7 +30,7 @@ export default function AjaxHooks(){
   }
   
   const parseAndSetPokemons = async (pokemonsUnparsed) => {
-    //console.log(pokemonsUnparsed);
+    console.log(pokemonsUnparsed);
     const pokemonResponsesPromises = await pokemonsUnparsed.map(async (pokemon) => {
       const pokemonData = await getPokemonByUrl(pokemon.url)
       return {
@@ -38,10 +42,10 @@ export default function AjaxHooks(){
     const parsedPokemons = await Promise.all(pokemonResponsesPromises)
     setPokemons(parsedPokemons)
   }
-
- 	useEffect(() => {
- 		if (!puerta){
- 			puerta = true;
+  
+  useEffect(() => {
+    if (!puerta){
+      puerta = true;
       const init = async () => {
         const allPokemons = await getAllPokemons()
         parseAndSetPokemons(allPokemons)
@@ -49,7 +53,7 @@ export default function AjaxHooks(){
       init()
  		}
  	},[])
-	
+  
 	return(
 		<>
 			<h1>Hook - useEffect (peticiones aync/pokeapi)</h1>

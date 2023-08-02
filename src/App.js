@@ -1,28 +1,24 @@
 import React from "react";
 import './App.css';
 // import ContadorHooks from "./componentes/ContadorHooks";
-// import AjaxHooks from "./componentes/AjaxHooks";
-// import Referencias from './componentes/Referencias'
+//import Formularios from "./componentes/Formularios";
+import DisplayPokemons from "./componentes/DisplayPokemons";
 // import CustomHook from "./componentes/CustomHook";
-import Formularios from "./componentes/Formularios";
-
+// import Referencias from './componentes/Referencias'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <section>
+          {/* <hr/>
+          <Formularios/>*/}
           <hr/>
-            <Formularios/>
+          <DisplayPokemons/>
+          <hr/>{/*}
+          <CustomHook/>
           <hr/>
-            {/* <ContadorHooks/>
-          <hr/>
-            <AjaxHooks/>
-          <hr></hr>
-          <hr/>
-            <CustomHook/>
-          <hr/>
-            <Referencias/>
+          <Referencias/>
           <hr/> */}
         </section>
       </header>
