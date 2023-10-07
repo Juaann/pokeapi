@@ -45,7 +45,7 @@ export default function DisplayPokemons(){
  	},[])
   
   const onAddFavorites = (pokemon) =>{
-    setFavoritePokemons([...favoritePokemons, pokemon])
+      setFavoritePokemons([...favoritePokemons, pokemon])
   }
 
 	return(
